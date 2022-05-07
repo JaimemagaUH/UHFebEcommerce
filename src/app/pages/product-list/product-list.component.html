@@ -1,0 +1,12 @@
+<p>Product List: </p>
+<button (click)="onModify()">{{ canModify ? 'Stop' : 'Modify' }}</button>
+<input [(ngModel)]="filterValue" (change)="onFilter()">
+<div class="product-list">
+    <app-product
+        class="product"
+        *ngFor="let product of filteredProducts"
+        [product]="product"
+        [canDelete]="canModify"
+        (delete)="onDelete(product.id)"
+    ></app-product>
+</div>

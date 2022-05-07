@@ -1,0 +1,19 @@
+<div
+    class="product"
+    *ngIf="product"
+    (click)="onClick()"
+    [ngClass]="{
+        'product--active': isSelected
+    }"
+>
+    <img class="product__image" [src]="product.image">
+    <div class="product__info">
+        <p class="product__name">{{ product.name }}</p>
+        <p class="product__material">{{ product.materials }}</p>
+        <button
+            class="product__delete"
+            *ngIf="canDelete"
+            (click)="onDelete()"
+        >Eliminar</button>
+    </div>
+</div>
