@@ -1,0 +1,12 @@
+<div *ngIf="currentProduct">
+    <p>{{ currentProduct.name }}</p>
+    <div
+        class="product__color"
+        [ngStyle]="{
+            'background-color': currentProduct.color
+        }"
+    ></div>
+    <img [src]="currentProduct.image">
+    <p>{{ currentProduct.description }}</p>
+</div>
+<app-filter></app-filter>

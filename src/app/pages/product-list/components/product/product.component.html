@@ -15,5 +15,6 @@
             *ngIf="canDelete"
             (click)="onDelete()"
         >Eliminar</button>
+        <a [routerLink]="['/detail', product.id]">Ver más</a>
     </div>
 </div>
