@@ -9,6 +9,10 @@ export interface IProduct {
     id: string;
 }
 
+export interface IPostProductResponse {
+    id: string;
+}
+
 export enum ProductMaterial {
     FROZEN = 'Frozen',
     GRANITE = 'Granite',

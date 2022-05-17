@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from './models/product.models';
+import { IProduct } from '../../core/services/products/models/product.models';
 import { products } from './product-list.config';
+import { dollarToEur } from 'src/app/core/utils/money.helpers';
+import { MessageService } from 'src/app/core/services/message/message.service';
+import { ProductsService } from 'src/app/core/services/products/products.service';
 
 @Component({
   selector: 'app-product-list',
@@ -9,28 +12,52 @@ import { products } from './product-list.config';
 })
 export class ProductListComponent implements OnInit {
 
-  public products: IProduct[] = products as IProduct[];
-  public filteredProducts: IProduct[] = this.products;
+  public products?: IProduct[];
+  public filteredProducts?: IProduct[];
   public canModify: boolean = false;
   public filterValue: string = "";
+  public message: string = '';
 
-  constructor() { }
+  constructor(
+    private messageService: MessageService,
+    private productsService: ProductsService
+  ) {}
 
   ngOnInit(): void {
+    this.getProducts();
   }
 
   public onModify() {
     this.canModify = !this.canModify;
   }
 
+  /**
+   * Esta función elimina de la lista de productos el producto cuyo id haya sido recibido como argumento.
+   * 
+   * @param id Id del producto que se quiere eliminar.
+   */
   public onDelete(id: string) {
-    this.products = this.products.filter(product => product.id !== id);
-    this.filterValue = "eliminado";
+    this.productsService.deleteProduct(id).subscribe((product) => {
+      console.log('Eliminado!', product);
+      this.getProducts();
+    });
   }
 
   public onFilter() {
-    this.filteredProducts = this.products.filter(product => {
+    this.filteredProducts = this.products?.filter(product => {
       return product.name.toLowerCase().includes(this.filterValue.toLowerCase());
+    });
+  }
+
+  public sendMessage() {
+    this.messageService.setMessage(this.message);
+    this.message = '';
+  }
+
+  private getProducts() {
+    this.productsService.getProducts().subscribe((products) => {
+      this.products = products;
+      this.filteredProducts = products;
     });
   }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IProduct } from '../product-list/models/product.models';
+import { Observable } from 'rxjs';
+import { ProductsService } from 'src/app/core/services/products/products.service';
+import { IProduct } from '../../core/services/products/models/product.models';
 import { products } from '../product-list/product-list.config';
 
 @Component({
@@ -9,18 +11,17 @@ import { products } from '../product-list/product-list.config';
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
-
-  public products: IProduct[] = products as IProduct[];
-  public currentProduct?: IProduct;
+  public currentProduct$?: Observable<IProduct>;
 
   constructor(
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductsService
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       const productId = params['productId'];
-      this.currentProduct = this.products.find(product => product.id === productId);
+      this.currentProduct$ = this.productService.getProductById(productId);
     });
   }
 

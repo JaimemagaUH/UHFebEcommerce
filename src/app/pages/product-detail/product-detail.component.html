@@ -1,4 +1,4 @@
-<div *ngIf="currentProduct">
+<div *ngIf="(currentProduct$ | async) as currentProduct">
     <p>{{ currentProduct.name }}</p>
     <div
         class="product__color"

@@ -1,4 +1,15 @@
 <div>
-    <p><a [routerLink]="['']">Home</a></p>
-    <a [routerLink]="['/product-list']">Parrilla</a>
+    <a 
+        [ngStyle]="{ 'margin-right': '10px'}"
+        [routerLink]="['']"
+        [ngClass]="{
+            'link--active': selectedRoute === ''
+        }"
+    >Home</a>
+    <a
+        [routerLink]="['/product-list']"
+        [ngClass]="{
+            'link--active': selectedRoute === 'product-list'
+        }"
+    >Parrilla</a>
 </div>
