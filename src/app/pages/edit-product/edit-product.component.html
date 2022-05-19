@@ -1,0 +1,10 @@
+<!-- <app-form
+    *ngIf="(product$ | async) as product"
+    [editMode]="true"
+    [product]="product"
+></app-form> -->
+<app-form
+    *ngIf="product"
+    [product]="product"
+    [editMode]="true"
+></app-form>

@@ -13,7 +13,6 @@ import { ProductsService } from 'src/app/core/services/products/products.service
 export class ProductListComponent implements OnInit {
 
   public products?: IProduct[];
-  public filteredProducts?: IProduct[];
   public canModify: boolean = false;
   public filterValue: string = "";
   public message: string = '';
@@ -43,12 +42,6 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  public onFilter() {
-    this.filteredProducts = this.products?.filter(product => {
-      return product.name.toLowerCase().includes(this.filterValue.toLowerCase());
-    });
-  }
-
   public sendMessage() {
     this.messageService.setMessage(this.message);
     this.message = '';
@@ -57,7 +50,6 @@ export class ProductListComponent implements OnInit {
   private getProducts() {
     this.productsService.getProducts().subscribe((products) => {
       this.products = products;
-      this.filteredProducts = products;
     });
   }
 

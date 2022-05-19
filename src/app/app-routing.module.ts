@@ -16,6 +16,14 @@ const routes: Routes = [
     loadChildren: () => import('src/app/pages/product-detail/product-detail.module').then(m => m.ProductDetailModule)
   },
   {
+    path: 'create-product',
+    loadChildren: () => import('src/app/pages/create-product/create-product.module').then(m => m.CreateProductModule)
+  },
+  {
+    path: 'edit-product/:productId',
+    loadChildren: () => import('src/app/pages/edit-product/edit-product.module').then(m => m.EditProductModule)
+  },
+  {
     path: '**',
     redirectTo: ''
   }

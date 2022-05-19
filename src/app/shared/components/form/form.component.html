@@ -1,0 +1,57 @@
+<form
+    *ngIf="productForm"
+    [formGroup]="productForm"
+    (submit)="saveProduct()"
+    class="form"
+>
+    <div class="field-container">
+        <input class="form__input" placeholder="Name" formControlName="name">
+        <p
+            *ngIf="!productForm.get('name')?.valid && productForm.get('name')?.dirty"
+            class="input-error"
+        >
+            This value is required
+        </p>
+    </div>
+    <div class="field-container">
+        <input class="form__input" placeholder="Price" formControlName="price">
+        <p
+            *ngIf="!productForm.get('price')?.valid
+            && productForm.get('price')?.dirty
+            && productForm.get('price')?.errors?.['required']"
+            class="input-error"
+        >
+            This value is required
+        </p>
+        <p
+            *ngIf="!productForm.get('price')?.valid
+            && productForm.get('price')?.dirty
+            && productForm.get('price')?.errors?.['maxlength']"
+            class="input-error"
+        >
+            This value exceeds the maximun price length
+        </p>
+    </div>
+    <div class="field-container">
+        <input class="form__input" placeholder="Image" formControlName="image">
+    </div>
+    <div class="field-container">
+        <input class="form__input" placeholder="Color" formControlName="color">
+    </div>
+    <div class="field-container">
+        <select class="form__input form__select" formControlName="materials">
+            <option
+                *ngFor="let option of materials"
+                [value]="option"
+            >{{ option }}</option>
+        </select>
+    </div>
+    <div class="field-container">
+        <textarea class="form__input form__textarea" formControlName="description"></textarea>
+    </div>
+    <button
+        class="form__button"
+        type="submit"
+        [disabled]="!productForm.valid"
+    >{{ product ? 'Edit' : 'Create' }}</button>
+</form>
