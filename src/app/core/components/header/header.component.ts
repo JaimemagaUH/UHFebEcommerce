@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { faBoxOpen, faUser, faUserCheck } from '@fortawesome/free-solid-svg-icons';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +10,13 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  public openBoxIcon = faBoxOpen;
+  public userIcon = faUser;
   public selectedRoute?: string;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -20,6 +25,17 @@ export class HeaderComponent implements OnInit {
         this.selectedRoute = event.url.split('/')[1];
       }
     });
+    this.userService.userLogged$.subscribe((isLogged:boolean) => {
+      this.userIcon = isLogged ? faUserCheck : faUser;
+    });
+  }
+
+  public login() {
+    if (this.userService.isLoggedIn()) {
+      this.router.navigate(['/my-account']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
 }

@@ -4,6 +4,8 @@ import { products } from './product-list.config';
 import { dollarToEur } from 'src/app/core/utils/money.helpers';
 import { MessageService } from 'src/app/core/services/message/message.service';
 import { ProductsService } from 'src/app/core/services/products/products.service';
+import { PaginationService } from 'src/app/core/services/pagination.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -16,18 +18,30 @@ export class ProductListComponent implements OnInit {
   public canModify: boolean = false;
   public filterValue: string = "";
   public message: string = '';
+  public sortCriteria: boolean = true;
+  public page: number = 0;
+  public maxPage: number = 0;
 
   constructor(
     private messageService: MessageService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private paginationService: PaginationService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.getProducts();
+    this.products = this.activatedRoute.snapshot.data[0];
+    this.paginationService.maxPage$.subscribe(page => {
+      this.maxPage = page;
+    });
   }
 
   public onModify() {
     this.canModify = !this.canModify;
+  }
+
+  public changeSortCriteria() {
+    this.sortCriteria = !this.sortCriteria;
   }
 
   /**

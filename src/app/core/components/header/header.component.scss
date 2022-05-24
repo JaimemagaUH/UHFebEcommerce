@@ -1,3 +1,64 @@
-.link--active {
-    font-weight: bold;
+.header {
+    background-color: #303030;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+
+    &__brand {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    &__icon {
+        color: white;
+        margin: 16px;
+    }
+
+    &__title,
+    &__nav {
+        color: white;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    &__user {
+        margin-right: 48px;
+        font-size: 22px;
+
+        &:hover {
+            cursor: pointer;
+            opacity: 0.7;
+        }
+    }
+
+    &__title {
+        font-size: 20px;
+    }
+
+    &__nav {
+        display: flex;
+        font-size: 18px;
+        flex: 1;
+        margin: 0 80px;
+        justify-content: center;
+    }
+
+    &__link {
+        margin-right: 48px;
+        cursor: pointer;
+        text-decoration: none;
+        color: white;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &--active {
+            font-weight: bold;
+        }
+    }
+
 }

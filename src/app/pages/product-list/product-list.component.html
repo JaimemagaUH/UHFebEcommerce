@@ -1,13 +1,15 @@
 <p>Product List: </p>
 <button (click)="onModify()">{{ canModify ? 'Stop' : 'Modify' }}</button>
 <input [(ngModel)]="filterValue">
+<input type="number" [(ngModel)]="page" [max]="maxPage">
+<button (click)="changeSortCriteria()">{{ sortCriteria ? 'Ascendent' : 'Descendent' }}</button>
 <div
     *ngIf="products"
     class="product-list"
 >
     <app-product
         class="product"
-        *ngFor="let product of (products | filter:filterValue)"
+        *ngFor="let product of (products | sort:sortCriteria | filter:filterValue | paginate:page)"
         [product]="product"
         [canDelete]="canModify"
         (delete)="onDelete(product.id)"

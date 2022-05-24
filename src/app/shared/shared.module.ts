@@ -5,12 +5,16 @@ import { FilterPipe } from './pipes/filter.pipe';
 import { FormComponent } from './components/form/form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SortPipe } from './pipes/sort.pipe';
+import { PaginationPipe } from './pipes/paginate.pipe';
 
 @NgModule({
   declarations: [
     FilterComponent,
     FilterPipe,
-    FormComponent
+    FormComponent,
+    SortPipe,
+    PaginationPipe
   ],
   imports: [
     CommonModule,
@@ -20,7 +24,9 @@ import { RouterModule } from '@angular/router';
   exports: [
     FilterComponent,
     FilterPipe,
-    FormComponent
+    FormComponent,
+    SortPipe,
+    PaginationPipe
   ]
 })
 export class SharedModule { }

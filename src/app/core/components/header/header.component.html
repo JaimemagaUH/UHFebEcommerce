@@ -1,15 +1,40 @@
-<div>
-    <a 
-        [ngStyle]="{ 'margin-right': '10px'}"
-        [routerLink]="['']"
-        [ngClass]="{
-            'link--active': selectedRoute === ''
-        }"
-    >Home</a>
-    <a
-        [routerLink]="['/product-list']"
-        [ngClass]="{
-            'link--active': selectedRoute === 'product-list'
-        }"
-    >Parrilla</a>
+<div class="header">
+    <div [routerLink]="['']" class="header__brand">
+        <fa-icon
+            class="header__icon"
+            [icon]="openBoxIcon"
+            size="2x"
+        ></fa-icon>
+        <p class="header__title">Products Bazaar</p>
+    </div>
+    <div class="header__nav">
+        <a
+            class="header__link"
+            [routerLink]="['']"
+            [ngClass]="{
+                'header__link--active': selectedRoute === ''
+            }"
+        >Home</a>
+        <a
+            class="header__link"
+            [routerLink]="['/product-list']"
+            [ngClass]="{
+                'header__link--active': selectedRoute === 'product-list'
+            }"
+        >List</a>
+        <a
+            [routerLink]="['/create-product']"
+            class="header__link"
+            [ngClass]="{
+                'header__link--active': selectedRoute === 'create-product'
+            }"
+        >Create products</a>
+    </div>
+    <fa-icon
+        class="header__icon"
+        [icon]="userIcon"
+        (click)="login()"
+        size="lg"
+    ></fa-icon>
 </div>
+
